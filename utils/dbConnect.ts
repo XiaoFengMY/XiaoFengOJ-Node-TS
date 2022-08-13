@@ -16,6 +16,7 @@ async function dbConnect() {
     const connection = await mongoose.connect(dbUrl, {
       user: dbUser,
       pass: dbPassword,
+      // authSource: Define the database to authenticate against
       authSource: dbAuthSource,
     })
 

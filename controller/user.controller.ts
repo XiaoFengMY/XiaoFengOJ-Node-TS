@@ -1,8 +1,7 @@
 // user.controller.ts
 
 import { Request, Response } from 'express'
-import commonRes from '../utils/commonRes'
-import silentHandle from '../utils/silentHandle'
+import { commonRes, silentHandle } from '../utils'
 import { CreateUserInput } from '../schema/user.schema'
 import USER_CRUD from '../service/user.service'
 

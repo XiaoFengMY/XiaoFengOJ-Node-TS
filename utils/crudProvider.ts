@@ -2,7 +2,14 @@
 
 // 根据自己的需要增加
 
-import { FilterQuery, UpdateQuery, DocumentDefinition, QueryOptions, Model, InsertManyOptions } from 'mongoose'
+import {
+  FilterQuery,
+  UpdateQuery,
+  DocumentDefinition,
+  QueryOptions,
+  Model,
+  InsertManyOptions,
+} from 'mongoose'
 
 class BaseCrudProviderCls<document, Cdocument> {
   private DBModel: Model<any>
@@ -17,11 +24,19 @@ class BaseCrudProviderCls<document, Cdocument> {
     return data.toJSON()
   }
 
-  async update(query: FilterQuery<document>, update: UpdateQuery<document>, options?: QueryOptions) {
+  async update(
+    query: FilterQuery<document>,
+    update: UpdateQuery<document>,
+    options?: QueryOptions
+  ) {
     return this.DBModel.updateOne(query, update, options)
   }
 
-  async find(query: FilterQuery<document>, projection?: any, options?: QueryOptions) {
+  async find(
+    query: FilterQuery<document>,
+    projection?: any,
+    options?: QueryOptions
+  ) {
     const result = await this.DBModel.find(query, projection, options)
     return result && result.map((d) => d.toJSON())
   }

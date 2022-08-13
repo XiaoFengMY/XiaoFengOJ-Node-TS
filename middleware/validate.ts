@@ -2,7 +2,7 @@
 
 import { Request, Response, NextFunction } from 'express'
 import { AnyZodObject } from 'zod'
-import commonRes from '../utils/commonRes'
+import { commonRes } from '../utils'
 
 const validate =
   (schema: AnyZodObject) =>

@@ -3,5 +3,5 @@ export default {
   dbUrl: 'mongodb://localhost:27017/xiaofengoj',
   dbUser: 'xiaofeng',
   dbPassword: 'xiaofeng',
-  dbAuthSource: 'xiaofengoj',
+  dbAuthSource: 'admin',
 }

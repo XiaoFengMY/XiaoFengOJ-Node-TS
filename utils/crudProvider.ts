@@ -40,6 +40,15 @@ class BaseCrudProviderCls<document, Cdocument> {
     const result = await this.DBModel.find(query, projection, options)
     return result && result.map((d) => d.toJSON())
   }
+
+  async findOne(
+    query: FilterQuery<document>,
+    projection?: any,
+    options?: QueryOptions
+  ) {
+    const result = await this.DBModel.find(query, projection, options)
+    return result && result.map((d) => d.toJSON())
+  }
 }
 
 const BaseCrudProvider = function <document, Cdocument>(DBModel: Model<any>) {
@@ -49,6 +58,7 @@ const BaseCrudProvider = function <document, Cdocument>(DBModel: Model<any>) {
     create: CRUD.create.bind(CRUD),
     update: CRUD.update.bind(CRUD),
     find: CRUD.find.bind(CRUD),
+    findOne: CRUD.findOne.bind(CRUD),
   }
 }
 

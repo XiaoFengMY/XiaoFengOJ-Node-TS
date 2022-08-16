@@ -5,9 +5,9 @@ import { object, string, TypeOf } from 'zod'
 
 // 创建接口
 export const createUserSchema = object({
-  query: object({
-    account: string({ required_error: '缺少账号名称' }).min(1),
-    name: string({ required_error: '缺少用户姓名' }).min(1),
+  body: object({
+    phone: string({ required_error: '缺少用户手机号' }).min(1),
+    captcha: string({ required_error: '缺少验证码' }).min(1),
     password: string({ required_error: '缺少用户密码' }).min(
       6,
       '密码太短 - 至少6个字符'
@@ -17,6 +17,12 @@ export const createUserSchema = object({
     message: '两次密码不匹配',
     path: ['passwordConfirmation'],
   }),
+})
+
+export const getCaptchaSchema = object({
+  body: object({
+    phone: string({ required_error: '缺少用户手机号' }).min(1),
+  })
 })
 
 export type CreateUserInput = Omit<

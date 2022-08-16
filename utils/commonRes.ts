@@ -38,7 +38,7 @@ function commonRes(res: Response, data: unknown, options?: ResOption) {
 commonRes.error = function (
   res: Response,
   data: unknown,
-  message?: unknown,
+  message?: string,
   status?: number
 ) {
   logger.error(message || CodeMessage['error'])

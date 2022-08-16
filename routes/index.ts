@@ -27,11 +27,6 @@ const getInfo = function () {
 function routes(app: Express) {
   // 根目录
   app.get('/', async (req: Request, res: Response) => {
-    // res.status(200).send('Hello Shinp!!!')
-    // commonRes(res, { word: 'Hello Shinp!!!' }, { type: 'success', message: '请求成功' }) 成功
-    // commonRes.denied(res, null) 无权限
-    // commonRes.error(res, null) 错误
-    // commonRes(res, { word: 'Hello Shinp!!!' }) // 成功
     const [e, result] = await silentHandle(getInfo)
     e ? commonRes.error(res, null) : commonRes(res, { result })
   })

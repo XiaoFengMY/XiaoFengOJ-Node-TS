@@ -21,11 +21,18 @@ export async function createUserHandler(
     const resDate: any = captcha
     const captchaTime = resDate[0].Id
     if (
-      nowTime - captchaTime <= 60000 &&
+      nowTime - captchaTime <= 180000 &&
       resDate[0].captcha == req.body.captcha
     ) {
       const [e, user] = await silentHandle(USER_CRUD.create, req.body)
       return e ? commonRes.error(res, null, '注册失败') : commonRes(res, user)
+    } else if (
+      nowTime - captchaTime > 180000 &&
+      resDate[0].captcha == req.body.captcha
+    ) {
+      commonRes.error(res, null, '验证码过期')
+    } else if (resDate[0].captcha != req.body.captcha) {
+      commonRes.error(res, null, '验证码错误')
     }
   } else if (errs) {
     commonRes.error(res, null, '注册失败')

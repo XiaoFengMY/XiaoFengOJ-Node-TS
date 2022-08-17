@@ -12,7 +12,7 @@ interface ResOption {
 }
 
 // 默认成功响应
-function commonRes(res: Response, data: unknown, options?: ResOption) {
+function commonRes(res: Response, data?: unknown, options?: ResOption) {
   options = Object.assign({ type: Code[3000] }, options || {}) // 默认success
 
   const { type, status, message } = options
@@ -24,7 +24,7 @@ function commonRes(res: Response, data: unknown, options?: ResOption) {
   }
 
   // 响应参数
-  const sendRes: { code: number; data: unknown; message?: unknown } = {
+  const sendRes: { code: number; data?: unknown; message?: unknown } = {
     code: Code[type as codeType],
     data,
   }

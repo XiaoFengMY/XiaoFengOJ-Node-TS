@@ -7,6 +7,7 @@ export interface CaptchaDocument extends mongoose.Document {
   phone: string
   captcha: string
   Id: Date
+  useType: string
 }
 
 // 模板校验规则
@@ -14,6 +15,7 @@ const captchaSchema = new mongoose.Schema({
   Id: { type: Number, default: Date.now },
   phone: { type: String, required: true },
   captcha: { type: String, required: true },
+  useType: { type: String, require: true },
 })
 
 // 唯一

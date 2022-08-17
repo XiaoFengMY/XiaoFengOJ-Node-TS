@@ -19,6 +19,12 @@ export const createUserSchema = object({
   }),
 })
 
+export const loginUserSchema = object({
+  body: object({
+    phone: string({ required_error: '缺少用户手机号' }).min(1),
+  }),
+})
+
 export const getCaptchaSchema = object({
   body: object({
     phone: string({ required_error: '缺少用户手机号' }).min(1),

@@ -1,5 +1,8 @@
 import { Router } from 'express'
-import { createUserHandler, getCaptchaHandler } from '../controller/user.controller'
+import {
+  createUserHandler,
+  getCaptchaHandler,
+} from '../controller/user.controller'
 import validate from '../middleware/validate'
 import { createUserSchema, getCaptchaSchema } from '../schema/user.schema'
 

@@ -1,6 +1,7 @@
 // user.model.ts
 
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 // 模板接口
 export interface UserDocument extends mongoose.Document {
@@ -15,10 +16,17 @@ export interface UserDocument extends mongoose.Document {
 // 模板校验规则
 const userSchema = new mongoose.Schema(
   {
-    Id: {type: Number, default: new Date()},
+    Id: { type: Number, default: new Date() },
     phone: { type: String, required: true },
     account: { type: String, required: false },
-    password: { type: String, required: true },
+    password: {
+      type: String,
+      required: true,
+      set(val: string) {
+        // 参数1：要散列的值；参数2：指数，，可以理解为一个密码的强度，指数越大越影响效率
+        return bcrypt.hashSync(val, 10)
+      },
+    },
   },
   {
     timestamps: true,

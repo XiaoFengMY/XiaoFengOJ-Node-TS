@@ -10,13 +10,11 @@ export interface CaptchaDocument extends mongoose.Document {
 }
 
 // 模板校验规则
-const captchaSchema = new mongoose.Schema(
-  {
-    Id: { type: Number, default: Date.now },
-    phone: { type: String, required: true },
-    captcha: { type: String, required: true },
-  }
-)
+const captchaSchema = new mongoose.Schema({
+  Id: { type: Number, default: Date.now },
+  phone: { type: String, required: true },
+  captcha: { type: String, required: true },
+})
 
 // 唯一
 captchaSchema.index({ Id: 1 }, { unique: true })

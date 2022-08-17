@@ -3,6 +3,7 @@ import {
   createUserHandler,
   loginUserHandler,
   getCaptchaHandler,
+  loginStutusHandler,
 } from '../controller/user.controller'
 import validate from '../middleware/validate'
 import {
@@ -19,5 +20,7 @@ router.post('/create', validate(createUserSchema), createUserHandler)
 router.post('/login', validate(loginUserSchema), loginUserHandler)
 
 router.post('/getCaptcha', validate(getCaptchaSchema), getCaptchaHandler)
+
+router.post('/loginStatus', loginStutusHandler)
 
 export default router

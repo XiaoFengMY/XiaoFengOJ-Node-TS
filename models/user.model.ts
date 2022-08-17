@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
   {
     Id: { type: Number, default: new Date() },
     phone: { type: String, required: true },
-    account: { type: String, required: false },
+    username: { type: String, required: true },
     password: {
       type: String,
       required: true,

@@ -4,4 +4,5 @@ export default {
   dbUser: 'xiaofeng',
   dbPassword: 'xiaofeng',
   dbAuthSource: 'admin',
+  jwtKey: 'xiaofengmingyue',
 }

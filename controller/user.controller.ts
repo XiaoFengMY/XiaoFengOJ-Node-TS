@@ -1,9 +1,12 @@
-import { string } from 'zod'
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
+import config from 'config'
+import jwt from 'jsonwebtoken'
 import { commonRes, silentHandle } from '../utils'
 import { CreateUserInput } from '../schema/user.schema'
 import { USER_CRUD, CaptchaCRUD } from '../service'
+
+const jwtKey = config.get<string>('jwtKey')
 
 export async function createUserHandler(
   req: Request<object, object, CreateUserInput['body']>,
@@ -56,7 +59,14 @@ export async function loginUserHandler(req: Request, res: Response) {
         userPassword
       )
       if (isPasswordValid) {
-        return commonRes(res, {}, { message: '登录成功' })
+        jwt.sign(
+          { phone: req.body.phone },
+          jwtKey,
+          { expiresIn: '72h' },
+          (_, token) => {
+            return commonRes(res, token, { message: '登录成功' })
+          }
+        )
       } else {
         return commonRes.error(res, null, '密码错误')
       }
@@ -137,4 +147,27 @@ export async function getCaptchaHandler(req: Request, res: Response) {
   return err
     ? commonRes.error(res, null, '获取验证码失败！')
     : commonRes(res, captcha, { message: '验证码已发送' })
+}
+
+export async function loginStutusHandler(req: Request, res: Response) {
+  const headers: any = req.headers
+  const token = headers['authorization'].split(' ')[1]
+  jwt.verify(token, jwtKey, async (err: any, payload: any) => {
+    if (err) {
+      return commonRes.error(res, null, '未登录')
+    } else {
+      const [e, user] = await silentHandle(
+        USER_CRUD.findOne,
+        {
+          phone: payload.phone,
+        },
+        { Id: 1, phone: 1, username: 1 }
+      )
+      if (user != false) {
+        return commonRes(res, user)
+      } else {
+        return commonRes.error(res, null)
+      }
+    }
+  })
 }

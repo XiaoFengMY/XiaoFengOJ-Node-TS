@@ -8,6 +8,7 @@ export const createUserSchema = object({
   body: object({
     phone: string({ required_error: '缺少用户手机号' }).min(1),
     captcha: string({ required_error: '缺少验证码' }).min(1),
+    username: string({ required_error: '缺少用户名' }).min(1),
     password: string({ required_error: '缺少用户密码' }).min(
       6,
       '密码太短 - 至少6个字符'
